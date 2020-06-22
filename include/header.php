@@ -91,8 +91,8 @@ function mysql_fix_string($string){
 
                    <li><a><i class="fa fa-edit"></i> Orders <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="order_list.php">Order List</a></li>
-                      <li><a href="ordered_item.php">Ordered Item List</a></li>
+                    <!--   <li><a href="order_list.php">Order List</a></li>
+                      <li><a href="ordered_item.php">Ordered Item List</a></li> -->
                     </ul>
                   </li>
 

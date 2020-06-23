@@ -12,11 +12,13 @@
 
 				$sql_related = "SELECT * FROM `product` WHERE `category_id`='$row[category_id]' AND `id` != '$product_id' ORDER BY `id` DESC LIMIT 10";
 				if (!empty($row['sub_cat_id'])) {
-					$sql_related = "SELECT * FROM `product` WHERE `sub_cat_id`='$row[sub_cat_id]' AND `id` != '$product_id' ORDER BY `id` DESC LIMIT 10";
+					$sql_related = "SELECT `product`.*  FROM `related_product` INNER JOIN `product` ON product.id = `related_product`.`related_to_id` WHERE `related_product`.`product_id`='$product_id' AND `product`.is_delete='1'";
 				}
 				$row['related_products'] = [];
 				if ($res_related = $connection->query($sql_related)) {
-					$row['related_products'] = $res_related->fetch_all(MYSQLI_ASSOC);
+					while ($row_related = $res_related->fetch_assoc()) {
+						$row['related_products'][] = $row_related;
+					}					
 				}
 				
 	 			$response =[

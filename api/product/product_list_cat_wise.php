@@ -38,9 +38,6 @@
 							'name' => $row['name'],
 							'mrp' => $row['mrp'],
 							'price' => $row['price'],
-							'cash_back' => $row['cash_back'],
-							'promotional_bonus' => $row['promotional_bonus'],
-							'is_star_product' => $row['is_star_product'],
 							'image' => $row['image'],
 						];
 					}

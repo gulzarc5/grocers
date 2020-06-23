@@ -5,7 +5,8 @@
 	
 	$sliders = [];
 	$new_arrivals = [];
-	$star_products = [];
+	$popular_products = [];
+	$trending_products = [];
 
 	$sql = "SELECT * FROM `slider` WHERE `status`='1'";
 	if ($res = $connection->query($sql)) {
@@ -28,24 +29,37 @@
 			'price' => $new_arrival['price'],
 			'cash_back' => $new_arrival['cash_back'],
 			'promotional_bonus' => $new_arrival['promotional_bonus'],
-			'is_star_product' => $new_arrival['is_star_product'],
 			'image' => $new_arrival['image'],
 			];
 		}
 	}
 
-	$sql = "SELECT * FROM `product` WHERE `is_star_product`='2' ORDER BY `id` DESC";
+	$sql = "SELECT * FROM `product` WHERE `is_tranding`='2' ORDER BY `id` DESC";
 	if ($res = $connection->query($sql)) {
-		while($star_product = $res->fetch_assoc()){		
-			$star_products[] = [
-			'id' => $star_product['id'],
-			'name' => $star_product['name'],
-			'mrp' => $star_product['mrp'],
-			'price' => $star_product['price'],
-			'cash_back' => $star_product['cash_back'],
-			'promotional_bonus' => $star_product['promotional_bonus'],
-			'is_star_product' => $star_product['is_star_product'],
-			'image' => $star_product['image'],
+		while($trending_product = $res->fetch_assoc()){		
+			$trending_products[] = [
+			'id' => $trending_product['id'],
+			'name' => $trending_product['name'],
+			'mrp' => $trending_product['mrp'],
+			'price' => $trending_product['price'],
+			'cash_back' => $trending_product['cash_back'],
+			'promotional_bonus' => $trending_product['promotional_bonus'],
+			'image' => $trending_product['image'],
+			];
+		}
+	}
+
+	$sql = "SELECT * FROM `product` WHERE `is_popular`='2' ORDER BY `id` DESC";
+	if ($res = $connection->query($sql)) {
+		while($popular_product = $res->fetch_assoc()){		
+			$popular_products[] = [
+			'id' => $popular_product['id'],
+			'name' => $popular_product['name'],
+			'mrp' => $popular_product['mrp'],
+			'price' => $popular_product['price'],
+			'cash_back' => $popular_product['cash_back'],
+			'promotional_bonus' => $popular_product['promotional_bonus'],
+			'image' => $popular_product['image'],
 			];
 		}
 	}
@@ -53,7 +67,8 @@
 	$data = [
 		'sliders' => $sliders,
 		'new_arrivals' => $new_arrivals,
-		'star_products' => $star_products,
+		'polular_products' => $popular_products,
+		'trending_products' => $trending_products,
 	];
 	$response =[
 		"status" => true,

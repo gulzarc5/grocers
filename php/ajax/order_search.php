@@ -51,7 +51,6 @@ date_default_timezone_set('Asia/Kolkata');
              while ($row = $res->fetch_assoc()) {
               $action = null;
               $amount = number_format($row['amount'],2);
-              $wallet_pay = number_format($row['wallet_pay'],2);
               $payable_amount = number_format($row['total'],2);
               $time_format = date("g:i a", strtotime($row['time']));
               if ($row['status'] == 1) {
@@ -60,6 +59,14 @@ date_default_timezone_set('Asia/Kolkata');
                   $status = '<p class="btn btn-success disabled">Delivered</p>';
               }
 
+               if ($row['delivery_time'] == 1) {
+                  $deliveryStatus = '<p">Morning</p">';
+                }elseif ($row['delivery_time'] == 2) {
+                  $deliveryStatus = '<p">Evening</p">';
+                }else{
+                  $deliveryStatus = '<p">Express</p">';
+                }
+
              $action = "<a class='btn btn-success' href='view_orders.php?id=$row[id]&s_date=$s_date&e_date=$e_date'>View</a>";
             if ($row['status'] == 1) {
               $action = $action."<a class='btn btn-success' href='php/orders/order_status_update.php?id=$row[id]&s_date=$s_date&e_date=$e_date'>Delivered</a></td>";
@@ -67,23 +74,17 @@ date_default_timezone_set('Asia/Kolkata');
                $action = $action."<!--<a class='btn btn-success' href='order_status_update.php?id=$row[id]'>Pending</a>--!>";
             }
 
-            if ($row['order_from'] == 2) {
-              $orderFrom = '<p">Offline</p">';
-            }else{
-              $orderFrom = '<p">App</p">';
-            }
-
               $html = $html."<tr>
                         <td>$count</td>
                         <td>$row[id]</td>
                         <td>$row[user_id]</td>
                         <td>$amount</td>
-                        <td>$wallet_pay</td>
-                        <td>$payable_amount</td>
+                        <td>".number_format($row['min_p_amount_charge'],2)."</td>
+                        <td>".number_format($row['express_charge'],2)."</td>
                         <td>$row[date]</td>
                         <td>$time_format</td>
                         <td>$status</td>
-                        <td>$orderFrom</td>
+                        <td>$deliveryStatus</td>
                         <td>$action</td></tr>";
               $count++;
             }

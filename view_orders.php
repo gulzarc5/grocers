@@ -57,7 +57,7 @@
 		            			$row_customer = $res_customer->fetch_assoc();
 
 		        ?>
-            <div style="text-align: center"><h1>SANTIREKHA</h1></div>
+            <div style="text-align: center"><h1>Grocers Zone</h1></div>
 
               	<div class="col-md-8 col-sm-8 col-xs-6">
               		<h2>Order Details<small></small></h2><br><br>
@@ -181,7 +181,7 @@
                         
                 <tbody>
                   <?php
-                    $sql_user_order = "SELECT `product`.`name` AS p_name,`order_details`.`price` AS o_price, `order_details`.`quantity` AS o_quantity,`order_details`.`price` AS o_price  FROM `order_details` INNER JOIN `product` ON `product`.`id` = `order_details`.`p_id` WHERE `order_details`.`order_id` ='$order_id'";
+                    $sql_user_order = "SELECT `product`.`name` AS p_name,`order_details`.`price` AS o_price, `order_details`.`quantity` AS o_quantity  FROM `order_details` INNER JOIN `product` ON `product`.`id` = `order_details`.`p_id` WHERE `order_details`.`order_id` ='$order_id'";
                     if ($res_user_order = $connection->query($sql_user_order)) {
                       $count = 1;
                       while($user_order_row = $res_user_order->fetch_assoc()){
@@ -198,21 +198,25 @@
                         $count++;
                       }
 
-                      $gross_amount = floatval($row_order['amount']) - floatval($row_order['discount']);
+                      
                       print "<tr>
                               <td colspan='4' align='right'>Total : </td>
                               <td>".number_format($row_order['amount'],2)."</td>
-                            </tr>
-                            <tr>
-                              <td colspan='4' align='right' >Gross Amount : </td>
-                              <td>".number_format($gross_amount,2)."</td>
-                            </tr>
-                            <tr>
-                              <td colspan='4' align='right' >Wallet Pay : </td>
-                              <td>".number_format($row_order['wallet_pay'],2)."</td>
-                            </tr>
+                            </tr>";
+                    if ($row_order['min_p_amount_charge'] > 0) {
+                       print "<tr>
+                              <td colspan='4' align='right'>Minimum Purchase Charge : </td>
+                              <td>".number_format($row_order['min_p_amount_charge'],2)."</td>
+                            </tr>";
+                    }
+                    if ($row_order['min_p_amount_charge'] > 0) {
+                       print "<tr>
+                              <td colspan='4' align='right'>Express Delivery Charge : </td>
+                              <td>".number_format($row_order['express_charge'],2)."</td>
+                            </tr>";
+                    }
                           
-                            <tr>
+                    print    "<tr>
                               <td colspan='4' align='right' >Net Payable Amount : </td>
                               <td>".number_format($row_order['total'],2)."</td>
                             </tr>";

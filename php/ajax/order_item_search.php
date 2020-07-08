@@ -15,7 +15,7 @@ include "../admin_login_system/php_user_session_check.php";
             $s_time_24  = "00:00:00";
             $e_time_24  = "23:59:59";
 
-            $sql = "SELECT `product`.`cash_back` AS p_cash_back,`product`.`sgst` AS p_sgst,`product`.`cgst` AS p_cgst,`product`.`cost` AS p_cost,`product`.`hsn_code` AS hsn_code,`product`.`name` AS p_name, `category`.`name` AS c_name, `order_details`.`p_id` as `p_id`,SUM(`order_details`.`quantity`) as quantity,SUM(`order_details`.`total_amount`) as total_amount FROM `order_details` INNER JOIN `product` ON `product`.`id`=`order_details`.`p_id` INNER JOIN `category` ON `category`.`id`=`product`.`category_id` WHERE `order_details`.`date` BETWEEN '$s_date' AND '$e_date' AND `order_details`.`time` BETWEEN '$s_time_24' AND '$e_time_24' GROUP BY `order_details`.`p_id` ORDER BY quantity DESC";
+            $sql = "SELECT `product`.`price` AS p_price,`product`.`name` AS p_name, `category`.`name` AS c_name, `order_details`.`p_id` as `p_id`,SUM(`order_details`.`quantity`) as quantity FROM `order_details` INNER JOIN `product` ON `product`.`id`=`order_details`.`p_id` INNER JOIN `category` ON `category`.`id`=`product`.`category_id` WHERE `order_details`.`date` BETWEEN '$s_date' AND '$e_date' AND `order_details`.`time` BETWEEN '$s_time_24' AND '$e_time_24' GROUP BY `order_details`.`p_id` ORDER BY quantity DESC";
             //echo $sql;
             if ($res = $connection->query($sql)) {
                 
@@ -29,7 +29,7 @@ include "../admin_login_system/php_user_session_check.php";
             $s_date = date('Y-m-d');
             $e_date = date('Y-m-d');
 
-            $sql = "SELECT `product`.`cash_back` AS p_cash_back,`product`.`sgst` AS p_sgst,`product`.`cgst` AS p_cgst,`product`.`cost` AS p_cost,`product`.`hsn_code` AS hsn_code,`product`.`name` AS p_name, `category`.`name` AS c_name, `order_details`.`p_id` as `p_id`,SUM(`order_details`.`quantity`) as quantity,SUM(`order_details`.`total_amount`) as total_amount FROM `order_details` INNER JOIN `product` ON `product`.`id`=`order_details`.`p_id` INNER JOIN `category` ON `category`.`id`=`product`.`category_id` WHERE `order_details`.`date` BETWEEN '$s_date' AND '$e_date' AND `order_details`.`time` BETWEEN '$s_time_24' AND '$e_time_24' GROUP BY `order_details`.`p_id` ORDER BY quantity DESC";
+            $sql = "SELECT `product`.`price` AS p_price,`product`.`name` AS p_name, `category`.`name` AS c_name, `order_details`.`p_id` as `p_id`,SUM(`order_details`.`quantity`) as quantity FROM `order_details` INNER JOIN `product` ON `product`.`id`=`order_details`.`p_id` INNER JOIN `category` ON `category`.`id`=`product`.`category_id` WHERE `order_details`.`date` BETWEEN '$s_date' AND '$e_date' AND `order_details`.`time` BETWEEN '$s_time_24' AND '$e_time_24' GROUP BY `order_details`.`p_id` ORDER BY quantity DESC";
             //echo $sql;
             if ($res = $connection->query($sql)) {
                 
@@ -40,7 +40,7 @@ include "../admin_login_system/php_user_session_check.php";
           $s_time_24  = date("H:i:s", strtotime($s_time));
           $e_time_24  = date("H:i:s", strtotime($e_time));
 
-          $sql = "SELECT `product`.`cash_back` AS p_cash_back,`product`.`sgst` AS p_sgst,`product`.`cgst` AS p_cgst,`product`.`cost` AS p_cost,`product`.`hsn_code` AS hsn_code,`product`.`name` AS p_name, `category`.`name` AS c_name, `order_details`.`p_id` as `p_id`,SUM(`order_details`.`quantity`) as quantity,SUM(`order_details`.`total_amount`) as total_amount FROM `order_details` INNER JOIN `product` ON `product`.`id`=`order_details`.`p_id` INNER JOIN `category` ON `category`.`id`=`product`.`category_id` WHERE `order_details`.`date` BETWEEN '$s_date' AND '$e_date' AND `order_details`.`time` BETWEEN '$s_time_24' AND '$e_time_24' GROUP BY `order_details`.`p_id` ORDER BY quantity DESC";
+          $sql = "SELECT `product`.`price` AS p_price,`product`.`name` AS p_name, `category`.`name` AS c_name, `order_details`.`p_id` as `p_id`,SUM(`order_details`.`quantity`) as quantity FROM `order_details` INNER JOIN `product` ON `product`.`id`=`order_details`.`p_id` INNER JOIN `category` ON `category`.`id`=`product`.`category_id` WHERE `order_details`.`date` BETWEEN '$s_date' AND '$e_date' AND `order_details`.`time` BETWEEN '$s_time_24' AND '$e_time_24' GROUP BY `order_details`.`p_id` ORDER BY quantity DESC";
            if ($res = $connection->query($sql)) {
                 
             }else{
@@ -57,13 +57,9 @@ include "../admin_login_system/php_user_session_check.php";
                       <td>$row[p_id]</td>
                       <td>$row[c_name]</td>
                       <td>$row[p_name]</td> 
-                      <td>$row[hsn_code]</td>
-                      <td>".$row['quantity']*$row['p_cost']."</td>
-                      <td>".$row['quantity']*$row['p_cgst']."</td>
-                      <td>".$row['quantity']*$row['p_sgst']."</td>
-                      <td>".$row['quantity']*$row['p_cash_back']."</td>
+                      <td>$row[p_price]</td>
                       <td>$row[quantity]</td>                        
-                      <td>".$row['total_amount']."</td>
+                      <td>".($row['p_price']*$row['quantity'])."</td>
                       </tr>";
                       $count++;
               }

@@ -62,7 +62,7 @@
 
                   <center>
                     <a class="btn btn-success" name="search" id="serach_id">Search</a>
-                    <a class="btn btn-info"  id="export_excel">Export Excel</a></center>
+                    <!-- <a class="btn btn-info"  id="export_excel">Export Excel</a></center> -->
                   </center>
                   
                 </form>
@@ -78,12 +78,12 @@
                   <th>Order Id</th>
                   <th>Customer Id</th>
                   <th>Amount</th>
-                  <th>Wallet Pay</th>
-                  <th>Payable Amount</th>
+                  <th>Minimum Purchase Charge</th>
+                  <th>Express Delivery Charge</th>
                   <th>Date</th>
                   <th>Time</th>
                   <th>Status</th>
-                  <th>Order From</th>
+                  <th>Delivery Time</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -99,17 +99,18 @@
                       $count = 1;
                       while($user_order_row = $res_user_order->fetch_assoc()){
                         $amount = number_format($user_order_row['amount'],2);
-                        $wallet_pay = number_format($user_order_row['wallet_pay'],2);
                         $payable_amount = number_format($user_order_row['total'],2);
                         if ($user_order_row['status'] == 1) {
                           $status = '<p class="btn btn-danger disabled">Pending</p>';
                         }else{
                           $status = '<p class="btn btn-success disabled">Delivered</p>';
                         }
-                        if ($user_order_row['order_from'] == 2) {
-                          $orderFrom = '<p">Offline</p">';
+                        if ($user_order_row['delivery_time'] == 1) {
+                          $deliveryStatus = '<p">Morning</p">';
+                        }elseif ($user_order_row['delivery_time'] == 2) {
+                          $deliveryStatus = '<p">Evening</p">';
                         }else{
-                          $orderFrom = '<p">App</p">';
+                          $deliveryStatus = '<p">Express</p">';
                         }
                         $time_format = date("g:i a", strtotime($user_order_row['time']));
                         print "<tr>
@@ -117,12 +118,12 @@
                         <td>$user_order_row[id]</td>
                         <td>$user_order_row[user_id]</td>
                         <td>$amount</td>
-                        <td>$wallet_pay</td>
-                        <td>$payable_amount</td>
+                        <td>".number_format($user_order_row['min_p_amount_charge'],2)."</td>
+                        <td>".number_format($user_order_row['express_charge'],2)."</td>
                         <td>$user_order_row[date]</td>
                         <td>$time_format</td>
                         <td>$status</td>                        
-                        <td>$orderFrom</td><td>";
+                        <td>$deliveryStatus</td><td>";
                         print "<a class='btn btn-success' href='view_orders.php?id=$user_order_row[id]&s_date=$s_date&e_date=$e_date''>View</a>";
 
                         if ($user_order_row['status'] == 1) {
@@ -144,17 +145,18 @@
                       $count = 1;
                       while($user_order_row = $res_user_order->fetch_assoc()){
                         $amount = number_format($user_order_row['amount'],2);
-                        $wallet_pay = number_format($user_order_row['wallet_pay'],2);
                         $payable_amount = number_format($user_order_row['total'],2);
                         if ($user_order_row['status'] == 1) {
                           $status = '<p class="btn btn-danger disabled">Pending</p>';
                         }else{
                           $status = '<p class="btn btn-success disabled">Delivered</p>';
                         }
-                        if ($user_order_row['order_from'] == 2) {
-                          $orderFrom = '<p">Offline</p">';
+                        if ($user_order_row['delivery_time'] == 1) {
+                          $deliveryStatus = '<p">Morning</p">';
+                        }elseif ($user_order_row['delivery_time'] == 2) {
+                          $deliveryStatus = '<p">Evening</p">';
                         }else{
-                          $orderFrom = '<p">App</p">';
+                          $deliveryStatus = '<p">Express</p">';
                         }
                         $time_format = date("g:i a", strtotime($user_order_row['time']));
                         print "<tr>
@@ -162,19 +164,18 @@
                         <td>$user_order_row[id]</td>
                         <td>$user_order_row[user_id]</td>
                         <td>$amount</td>
-                        <td>$wallet_pay</td>
-                        <td>$payable_amount</td>
+                        <td>".number_format($user_order_row['min_p_amount_charge'],2)."</td>
+                        <td>".number_format($user_order_row['express_charge'],2)."</td>
                         <td>$user_order_row[date]</td>
                         <td>$time_format</td>
-                        <td>$status</td>
-                        <td>$orderFrom</td>
-                        <td>";
-                        print "<a class='btn btn-success' href='view_orders.php?id=$user_order_row[id]'>View</a>";
+                        <td>$status</td>                        
+                        <td>$deliveryStatus</td><td>";
+                        print "<a class='btn btn-success' href='view_orders.php?id=$user_order_row[id]&s_date=$s_date&e_date=$e_date''>View</a>";
 
                         if ($user_order_row['status'] == 1) {
-                          print "<a class='btn btn-success' href='php/orders/order_status_update.php?id=$user_order_row[id]'>Delivered</a></td>";
+                          print "<a class='btn btn-success' href='php/orders/order_status_update.php?id=$user_order_row[id]&s_date=$s_date&e_date=$e_date'>Delivered</a></td>";
                         }else{
-                           print "<!--<a class='btn btn-success' href='order_status_update.php?id=$user_order_row[id]'>Pending</a>--!>";
+                           print "<!--<a class='btn btn-success' href='order_status_update.php?id=$user_order_row[id]&s_date=$s_date&e_date=$e_date'>Pending</a>--!>";
                         }
                         
                         "</td></tr>";

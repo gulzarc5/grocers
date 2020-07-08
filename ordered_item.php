@@ -70,7 +70,7 @@
                   </div>
 
                   <center><a class="btn btn-success" name="search" id="serach_id">Search</a>
-                  <a class="btn btn-info"  id="export_excel">Export Excel</a></center>
+                  <!-- <a class="btn btn-info"  id="export_excel">Export Excel</a></center> -->
                 </form>
               </div>
             
@@ -86,11 +86,7 @@
                   <th>Product Id</th>
                   <th>Product Category</th>
                   <th>Product Name</th>
-                  <th>HSN/SAC</th>
-                  <th>Purchase Cost</th>
-                  <th>CGST</th>
-                  <th>SGST</th>
-                  <th>Cashback</th>
+                  <th>Product Price</th>
                   <th>Sale Quantity</th>
                   <th>Total Amount</th>
                 </tr>
@@ -103,8 +99,7 @@
                   $e_time_24  = "23:59:59";
                   $s_date = date('Y-m-d');
                   $e_date = date('Y-m-d');
-                  $sql_user_order = "SELECT `product`.`cash_back` AS p_cash_back,`product`.`sgst` AS p_sgst,`product`.`cgst` AS p_cgst,`product`.`cost` AS p_cost,`product`.`hsn_code` AS hsn_code,`product`.`name` AS p_name, `category`.`name` AS c_name, `order_details`.`p_id` as `p_id`,SUM(`order_details`.`quantity`) as quantity,SUM(`order_details`.`total_amount`) as total_amount FROM `order_details` INNER JOIN `product` ON `product`.`id`=`order_details`.`p_id` INNER JOIN `category` ON `category`.`id`=`product`.`category_id` WHERE `order_details`.`date` BETWEEN '$s_date' AND '$e_date' AND `order_details`.`time` BETWEEN '$s_time_24' AND '$e_time_24' GROUP BY `order_details`.`p_id` ORDER BY quantity DESC";
-
+                  $sql_user_order = "SELECT `product`.`name` AS p_name, `product`.`price` AS p_price,`category`.`name` AS c_name, `order_details`.`p_id` as `p_id`,SUM(`order_details`.`quantity`) as quantity FROM `order_details` INNER JOIN `product` ON `product`.`id`=`order_details`.`p_id` INNER JOIN `category` ON `category`.`id`=`product`.`category_id` WHERE `order_details`.`date` BETWEEN '$s_date' AND '$e_date' AND `order_details`.`time` BETWEEN '$s_time_24' AND '$e_time_24' GROUP BY `order_details`.`p_id` ORDER BY quantity DESC";
                   // if (isset($_GET['s_date']) && isset($_GET['e_date']) && empty($_GET['s_time'])) {
                   //   # code...
                   // }elseif (isset($_GET['s_time']) && isset($_GET['e_time']) && empty($_GET['s_date'])) {
@@ -123,13 +118,9 @@
                         <td>$user_order_row[p_id]</td>
                         <td>$user_order_row[c_name]</td>
                         <td>$user_order_row[p_name]</td>
-                        <td>$user_order_row[hsn_code]</td>
-                        <td>".$user_order_row['quantity']*$user_order_row['p_cost']."</td>
-                        <td>".$user_order_row['quantity']*$user_order_row['p_cgst']."</td>
-                        <td>".$user_order_row['quantity']*$user_order_row['p_sgst']."</td>
-                        <td>".$user_order_row['quantity']*$user_order_row['p_cash_back']."</td>
+                        <td>$user_order_row[p_price]</td>
                         <td>$user_order_row[quantity]</td>                        
-                        <td>".$user_order_row['total_amount']."</td>
+                        <td>".($user_order_row['p_price']*$user_order_row['quantity'])."</td>
                         </tr>";
                         $count++;
                       }

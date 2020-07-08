@@ -95,7 +95,6 @@ include "include/header.php";
                       <th>Order Id</th>
                       <th>Customer Id</th>
                       <th>Amount</th>
-                      <th>Wallet Pay</th>
                       <th>Payable Amount</th>
                       <th>Date</th>
                       <th>Time</th>
@@ -108,7 +107,6 @@ include "include/header.php";
                     $count = 1;
                     while($user_order_row = $res_user_order->fetch_assoc()){
                       $amount = number_format($user_order_row['amount'],2);
-                      $wallet_pay = number_format($user_order_row['wallet_pay'],2);
                       $payable_amount = number_format($user_order_row['total'],2);
                       $time_format = date("g:i a", strtotime($user_order_row['time']));
                       print "<tr>
@@ -116,7 +114,6 @@ include "include/header.php";
                       <td>$user_order_row[id]</td>
                       <td>$user_order_row[user_id]</td>
                       <td>$amount</td>
-                      <td>$wallet_pay</td>
                       <td>$payable_amount</td>
                       <td>$user_order_row[date]</td>
                       <td>$time_format</td></tr>";

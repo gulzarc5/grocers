@@ -91,8 +91,8 @@ function mysql_fix_string($string){
 
                    <li><a><i class="fa fa-edit"></i> Orders <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <!--   <li><a href="order_list.php">Order List</a></li>
-                      <li><a href="ordered_item.php">Ordered Item List</a></li> -->
+                      <li><a href="order_list.php">Order List</a></li>
+                      <li><a href="ordered_item.php">Ordered Item List</a></li>
                     </ul>
                   </li>
 
@@ -126,7 +126,6 @@ function mysql_fix_string($string){
                     </ul>
                   </li>
                   <li><a href="customer_review.php"><i class="fa fa-edit"></i> Customers Review </span></a></li>
-                  <!-- <li><a href="star_member_chk.php?page=1" onclick="javascript:return confirm('Are you sure ?? you want to scan manually in the database. if maunaly scan it will not scan automatically in this month')"><i class="fa fa-edit"></i> Star Member Scan</span></a></li> -->
                 </ul>
               </div>
             </div>
@@ -146,71 +145,6 @@ function mysql_fix_string($string){
                 <li class="">
                   <a href="php/admin_login_system/user_logout.php"><i class="fa fa-sign-out"></i> Log Out</a>
                 </li>
-
-               <!--  <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li> -->
               </ul>
             </nav>
           </div>

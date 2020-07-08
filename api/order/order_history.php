@@ -10,7 +10,7 @@
  		    if($res_order->num_rows > 0){
  			while($row_orders = $res_order->fetch_assoc()) {
 
- 				$sql_ord_details = "SELECT `product`.`name` AS p_name, `product`.`image` AS p_image,`order_details`.`price` AS o_price, `order_details`.`quantity` AS o_quantity,`order_details`.`price` AS o_price,`order_details`.`total_cashback` AS total_cashback,`order_details`.`date` AS dates,`order_details`.`time` AS timedate  FROM `order_details` INNER JOIN `product` ON `product`.`id` = `order_details`.`p_id` WHERE `order_id` = '$row_orders[id]'";
+ 				$sql_ord_details = "SELECT `product`.`name` AS p_name, `product`.`image` AS p_image,`order_details`.`price` AS o_price, `order_details`.`quantity` AS o_quantity,`order_details`.`date` AS dates,`order_details`.`time` AS timedate  FROM `order_details` INNER JOIN `product` ON `product`.`id` = `order_details`.`p_id` WHERE `order_id` = '$row_orders[id]'";
  				if($res_ord_details= $connection->query($sql_ord_details)){
  					unset($ord_details); 
  					while($row_ord_details = $res_ord_details->fetch_assoc()) {
@@ -28,12 +28,13 @@
  				$order[] = [
  					'id' => $row_orders['id'],
  					'total' => $row_orders['amount'],
- 					'cashback' => $row_orders['cashback'],
- 					'wallet_pay' => $row_orders['wallet_pay'],
+ 					'min_purchase_charge' => $row_orders['min_p_amount_charge'],
+ 					'express_charge' => $row_orders['express_charge'],
  					'payable_amount' => $row_orders['total'],
-					 'delivery_status' => $row_orders['status'],
-					 'date' => $row_orders['date'] ,
-					 'time' => $row_orders['time'] ,
+					'delivery_status' => $row_orders['status'],
+					'delivery_time' => $row_orders['delivery_time'],
+					'date' => $row_orders['date'] ,
+					'time' => $row_orders['time'] ,
  					'products' => $ord_details,
  					];
  			}

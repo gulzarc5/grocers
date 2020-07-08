@@ -10,7 +10,7 @@
  		$key_search = explode(" ", $search_key);
 //  		print_r($key_search);
 //  		die();
- 		$sql_count = "SELECT COUNT(*) as total_rows FROM `product` WHERE `category_id`!='1009' AND `is_delete`='1'";
+ 		$sql_count = "SELECT COUNT(*) as total_rows FROM `product` WHERE  `is_delete`='1'";
  		foreach($key_search as $search){
  		    if(!empty($search)){
  		        $sql_count =$sql_count." AND (`name` LIKE '%$search%')";
@@ -25,7 +25,7 @@
 			$total_page = ceil($total_rows/10);
 
 			$limit = ($page*10)-10;
-			$sql_product = "SELECT * FROM `product` WHERE `category_id`!='1009' AND `is_delete`='1'";
+			$sql_product = "SELECT * FROM `product` WHERE  `is_delete`='1'";
 			foreach($key_search as $search){
 			    if(!empty($search)){
 			        $sql_product =$sql_product." AND (`name` LIKE '%$search%')";
@@ -43,9 +43,6 @@
 							'name' => $row_product['name'],
 							'mrp' => $row_product['mrp'],
 							'price' => $row_product['price'],
-							'cash_back' => $row_product['cash_back'],
-							'promotional_bonus' => $row_product['promotional_bonus'],
-							'is_star_product' => $row_product['is_star_product'],
 							'image' => $row_product['image'],
 						];
 

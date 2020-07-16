@@ -6,7 +6,7 @@ if(isset($_POST['brand_id']) && !empty($_POST['name'])){
 	$brand_id = $connection->real_escape_string(mysql_entities_fix_string($_POST['brand_id']));
     $brand = $connection->real_escape_string(mysql_entities_fix_string($_POST['name']));
     $category = $connection->real_escape_string(mysql_entities_fix_string($_POST['category']));
-    $sub_category = $connection->real_escape_string(mysql_entities_fix_string($_POST['sub_category']));
+    // $sub_category = $connection->real_escape_string(mysql_entities_fix_string($_POST['sub_category']));
     
     $image = $_FILES['image'];
     $image_name = null;
@@ -60,7 +60,7 @@ if(isset($_POST['brand_id']) && !empty($_POST['name'])){
         }
     }
     //echo $brands;
-   $sql = "UPDATE `brands` SET `name`='$brand',`category_id`='$category',`sub_category_id`='$sub_category' WHERE `id`='$brand_id'";
+   $sql = "UPDATE `brands` SET `name`='$brand',`category_id`='$category' WHERE `id`='$brand_id'";
     if ($result=$connection->query($sql)){
     
 		header("location:../../edit_brand.php?main_id=$brand_id&msg=1");

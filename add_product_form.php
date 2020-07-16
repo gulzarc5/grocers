@@ -248,22 +248,22 @@ include "include/footer.php";
     });
 
 
-    $("#sub_category").change(function(){
-      var cat_id = $("#sub_category").val();
+    // $("#sub_category").change(function(){
+    //   var cat_id = $("#sub_category").val();
 
-        $.ajax({
-        type: "POST",
-        url: "php/ajax/fetch_brand.php",
-        data:{ sub_cat_id : cat_id,},
-          success: function(data){
-              console.log(data);
-              if (data != "2") {
-                $("#brand").html(data);
-              }
+    //     $.ajax({
+    //     type: "POST",
+    //     url: "php/ajax/fetch_brand.php",
+    //     data:{ sub_cat_id : cat_id,},
+    //       success: function(data){
+    //           console.log(data);
+    //           if (data != "2") {
+    //             $("#brand").html(data);
+    //           }
                
-          }
-        });
-    });
+    //       }
+    //     });
+    // });
   });
 </script>
 

@@ -6,7 +6,7 @@
     if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
         
  		$cat_id = $connection->real_escape_string(mysql_entities_fix_string($_GET['cat_id']));
-        $sql = "SELECT * FROM `sub_category` WHERE `category_id` = '$cat_id'";
+        $sql = "SELECT * FROM `sub_category` WHERE `category_id` = '$cat_id' AND `delete_status`='1'";
         if ($res = $connection->query($sql)) {
             while($categor = $res->fetch_assoc()){
                 $category[] = [

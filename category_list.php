@@ -17,7 +17,7 @@ function showMessage($msg){
   }
 
 function getCategory($connection){
-  $sql = "SELECT `sub_category`.`name` AS sub_name,`sub_category`.`image` AS image, `sub_category`.`id` AS sub_cat_id, `category`.`name` AS cat_name FROM `sub_category` INNER JOIN `category` ON `category`.`id`=`sub_category`.`category_id`";
+  $sql = "SELECT `sub_category`.`name` AS sub_name,`sub_category`.`image` AS image, `sub_category`.`id` AS sub_cat_id, `category`.`name` AS cat_name FROM `sub_category` INNER JOIN `category` ON `category`.`id`=`sub_category`.`category_id` WHERE `sub_category`.`delete_status` = '1'";
   if ($res = $connection->query($sql)) {
     $sl_count = 1;
     while($category = $res->fetch_assoc()){
@@ -27,6 +27,7 @@ function getCategory($connection){
                 <td>'.$category['cat_name'].'</td>
                 <td><img src="uploads/sub_category/thumb/'.$category['image'].'" height="60"></td>
                 <td><a href="edit_cat.php?sub_id='.$category['sub_cat_id'].'" class="btn btn-success">Edit</a>
+                <a href="php/product_category/delete_sub_category.php?sub_id='.$category['sub_cat_id'].'" class="btn btn-danger" onclick="javascript:return confirm(\'are you sure ? \')">Delete</a>
                 </td>
              </tr>';
       $sl_count++;

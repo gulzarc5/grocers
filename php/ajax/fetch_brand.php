@@ -7,7 +7,7 @@ if ($_POST['cat_id']) {
 
 	$sql = "SELECT * FROM `brands` WHERE `category_id`='$cat_id'";
 	if ($res = $connection->query($sql)) {
-		$html = "<option value=''>Please Select Sub Category</option>";
+		$html = "<option value=''>Please Select Brand</option>";
 		while($row = $res->fetch_assoc()){
 			$html = $html."<option value='$row[id]'>$row[name]</option>";
 		}
@@ -20,7 +20,7 @@ if ($_POST['cat_id']) {
 
 	$sql = "SELECT * FROM `brands` WHERE `sub_category_id`='$cat_id'";
 	if ($res = $connection->query($sql)) {
-		$html = "<option value=''>Please Select Sub Category</option>";
+		$html = "<option value=''>Please Select Brand</option>";
 		while($row = $res->fetch_assoc()){
 			$html = $html."<option value='$row[id]'>$row[name]</option>";
 		}

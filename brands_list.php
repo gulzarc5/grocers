@@ -17,13 +17,15 @@ function showMessage($msg){
   }
 
 function getCategory($connection){
-  $sql = "SELECT * FROM `brands`";
+  $sql = "SELECT `brands`.*,`category`.`name` AS `cat_name` FROM `brands` INNER JOIN `category` ON `category`.`id`=`brands`.`category_id`  ";
+
   if ($res = $connection->query($sql)) {
     $sl_count = 1;
     while($category = $res->fetch_assoc()){
       print '<tr>
                 <td>'.$sl_count.'</td>
                 <td>'.$category['name'].'</td>
+                <td>'.$category['cat_name'].'</td>
                 <td><img src="uploads/brand/thumb/'.$category['image'].'" height="60"></td>
                 <td><a href="edit_brand.php?main_id='.$category['id'].'" class="btn btn-success">Edit</a>
                 </td>
@@ -41,7 +43,7 @@ function getCategory($connection){
            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Main Category List<small></small></h2>
+                    <h2>Brand List<small></small></h2>
                     <div class="clearfix"></div>
                       <?php 
                         if (isset($_GET['msg'])) {
@@ -55,6 +57,7 @@ function getCategory($connection){
                       <thead>
                         <tr>
                           <th>Sl</th>
+                          <th>Brand Name</th>
                           <th>Category Name</th>
                           <th>Image</th>
                           <th>Action</th>

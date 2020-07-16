@@ -19,7 +19,7 @@ if(isset($_POST['add_product']) && !empty($_POST['add_product'])){
     $popular = $connection->real_escape_string(mysql_entities_fix_string($_POST['popular']));
     $tranding = $connection->real_escape_string(mysql_entities_fix_string($_POST['tranding']));
    
-   $sql_p_check = "SELECT * FROM `product` WHERE `name`='$name' AND `sub_cat_id`='$sub_category'";
+   $sql_p_check = "SELECT * FROM `product` WHERE `name`='$name' AND `sub_cat_id`='$sub_category' AND `is_delete`='1'";
    if ($res_p_check = $connection->query($sql_p_check)) {
        if ($res_p_check->num_rows > 0) {
             header("location:../../add_product_form.php?msg=5");

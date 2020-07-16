@@ -6,7 +6,7 @@
 	if ($res = $connection->query($sql)) {
 		while($categor = $res->fetch_assoc()){
 			$sub_category = false;
-			$sub_category_sql = "SELECT * FROM `sub_category` WHERE `category_id`='$categor[id]'";
+			$sub_category_sql = "SELECT * FROM `sub_category` WHERE `category_id`='$categor[id]' AND `delete_status`='1'";
 			if ($sub_category_res = $connection->query($sub_category_sql)) {
 			    if( $sub_category_res->num_rows > 0){
     				$sub_category = true;

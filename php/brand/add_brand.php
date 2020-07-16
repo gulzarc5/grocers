@@ -6,7 +6,7 @@ if(isset($_POST['name']) ){
 	$brand = $connection->real_escape_string(mysql_entities_fix_string($_POST['name']));
     //echo $brand;
     $category = $connection->real_escape_string(mysql_entities_fix_string($_POST['category']));
-    $sub_category = $connection->real_escape_string(mysql_entities_fix_string($_POST['sub_category']));
+    // $sub_category = $connection->real_escape_string(mysql_entities_fix_string($_POST['sub_category']));
     $image = $_FILES['image'];
     $image_name = null;
     if (!empty($image['name'])) {
@@ -38,7 +38,7 @@ if(isset($_POST['name']) ){
     }
 
 
-    $sql ="INSERT INTO `brands`(`name`,`image`,`category_id`,`sub_category_id`) VALUES ('$brand','$image_name','$category','$sub_category')";
+    $sql ="INSERT INTO `brands`(`name`,`image`,`category_id`,`sub_category_id`) VALUES ('$brand','$image_name','$category',null)";
     if ($result=$connection->query($sql)){
     
 		header("location:../../add_brand_form.php?msg=1");

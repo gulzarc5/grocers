@@ -17,7 +17,7 @@ function showMessage($msg){
   }
 
 function getCategory($connection){
-  $sql = "SELECT * FROM `category`";
+  $sql = "SELECT * FROM `category` WHERE `delete_status`='1'";
   if ($res = $connection->query($sql)) {
     $sl_count = 1;
     while($category = $res->fetch_assoc()){
@@ -26,6 +26,7 @@ function getCategory($connection){
                 <td>'.$category['name'].'</td>
                 <td><img src="uploads/main_category/thumb/'.$category['image'].'" height="60"></td>
                 <td><a href="edit_main_category.php?main_id='.$category['id'].'" class="btn btn-success">Edit</a>
+                <a href="php/product_category/delete_main_category.php?sub_id='.$category['id'].'" class="btn btn-danger">Delete</a>
                 </td>
              </tr>';
       $sl_count++;

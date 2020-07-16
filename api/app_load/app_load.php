@@ -19,7 +19,7 @@
 		}
 	}
 
-	$sql = "SELECT * FROM `product` ORDER BY `id` DESC LIMIT 10";
+	$sql = "SELECT * FROM `product` WHERE `is_delete`='1' ORDER BY `id` DESC LIMIT 10";
 	if ($res = $connection->query($sql)) {
 		while($new_arrival = $res->fetch_assoc()){		
 			$new_arrivals[] = [
@@ -34,7 +34,7 @@
 		}
 	}
 
-	$sql = "SELECT * FROM `product` WHERE `is_tranding`='2' ORDER BY `id` DESC";
+	$sql = "SELECT * FROM `product` WHERE `is_tranding`='2' AND `is_delete`='1' ORDER BY `id` DESC";
 	if ($res = $connection->query($sql)) {
 		while($trending_product = $res->fetch_assoc()){		
 			$trending_products[] = [
@@ -49,7 +49,7 @@
 		}
 	}
 
-	$sql = "SELECT * FROM `product` WHERE `is_popular`='2' ORDER BY `id` DESC";
+	$sql = "SELECT * FROM `product` WHERE `is_popular`='2' AND `is_delete`='1' ORDER BY `id` DESC";
 	if ($res = $connection->query($sql)) {
 		while($popular_product = $res->fetch_assoc()){		
 			$popular_products[] = [
